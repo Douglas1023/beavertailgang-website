@@ -28,18 +28,21 @@ function HamburgerIcon({ open }: { open: boolean }) {
         background: COLORS.darkBrown, borderRadius: 1,
         transition: "all 0.3s ease",
         transform: open ? "translateY(6.25px) rotate(45deg)" : "none",
+        boxShadow: "0 0 0 0.5px rgba(250,248,244,0.6)",
       }} />
       <span style={{
         display: "block", width: "100%", height: 1.5,
         background: COLORS.darkBrown, borderRadius: 1,
         transition: "all 0.3s ease",
         opacity: open ? 0 : 1,
+        boxShadow: "0 0 0 0.5px rgba(250,248,244,0.6)",
       }} />
       <span style={{
         display: "block", width: "100%", height: 1.5,
         background: COLORS.darkBrown, borderRadius: 1,
         transition: "all 0.3s ease",
         transform: open ? "translateY(-6.25px) rotate(-45deg)" : "none",
+        boxShadow: "0 0 0 0.5px rgba(250,248,244,0.6)",
       }} />
     </div>
   );
@@ -146,12 +149,9 @@ export default function Nav() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
-                background: "none",
-                border: condensed ? "1px solid rgba(250,248,244,0.5)" : "none",
-                borderRadius: 8,
-                cursor: "pointer",
+                background: "none", border: "none", cursor: "pointer",
                 display: "flex", alignItems: "center",
-                padding: condensed ? 8 : 4,
+                padding: 4,
                 opacity: condensed ? 1 : 0,
                 width: condensed ? "auto" : 0,
                 overflow: "hidden",
@@ -216,10 +216,6 @@ export default function Nav() {
             position: "absolute",
             left: "50%",
             transform: "translateX(-50%)",
-            border: condensed ? "1px solid rgba(250,248,244,0.5)" : "none",
-            borderRadius: 8,
-            padding: condensed ? "4px 14px" : 0,
-            transition: "all 0.4s ease",
           }}>
             {/* Logo image — visible when condensed */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -240,6 +236,8 @@ export default function Nav() {
               fontFamily: "var(--font-body)", fontSize: "1rem",
               fontWeight: 600, letterSpacing: "0.14em",
               color: COLORS.darkBrown,
+              WebkitTextStroke: "0.5px rgba(250,248,244,0.6)",
+              paintOrder: "stroke fill",
               opacity: condensed ? 1 : 0,
               width: condensed ? "auto" : 0,
               overflow: "hidden",
