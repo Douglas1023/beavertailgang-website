@@ -347,13 +347,13 @@ export default function HomePage() {
         }}>
           Tag @beavertailgang or send us your best on-course photos wearing BTG.
         </p>
-        <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
+        <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", padding: "0 16px" }}>
           <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer"
             style={{
               display: "inline-flex", alignItems: "center", gap: 8,
-              fontFamily: "var(--font-body)", fontSize: "0.7rem",
-              fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase",
-              padding: "12px 32px",
+              fontFamily: "var(--font-body)", fontSize: "0.65rem",
+              fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase",
+              padding: "12px 20px",
               background: COLORS.darkBrown, color: COLORS.cream,
               textDecoration: "none",
               transition: "all 0.3s ease",
@@ -366,9 +366,9 @@ export default function HomePage() {
           <a href={BRAND.tiktok} target="_blank" rel="noopener noreferrer"
             style={{
               display: "inline-flex", alignItems: "center", gap: 8,
-              fontFamily: "var(--font-body)", fontSize: "0.7rem",
-              fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase",
-              padding: "12px 32px",
+              fontFamily: "var(--font-body)", fontSize: "0.65rem",
+              fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase",
+              padding: "12px 20px",
               background: "transparent", color: "var(--fg)",
               textDecoration: "none",
               border: "1px solid var(--border)",
@@ -382,9 +382,9 @@ export default function HomePage() {
           <a href={BRAND.youtube} target="_blank" rel="noopener noreferrer"
             style={{
               display: "inline-flex", alignItems: "center", gap: 8,
-              fontFamily: "var(--font-body)", fontSize: "0.7rem",
-              fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase",
-              padding: "12px 32px",
+              fontFamily: "var(--font-body)", fontSize: "0.65rem",
+              fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase",
+              padding: "12px 20px",
               background: "transparent", color: "var(--fg)",
               textDecoration: "none",
               border: "1px solid var(--border)",
