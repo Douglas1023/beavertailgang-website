@@ -206,7 +206,7 @@ export default function Nav() {
           </div>
 
           {/* Center — Brand name (full) / Logo + BTG (condensed) */}
-          <Link href="/" style={{
+          <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} style={{
             textDecoration: "none",
             display: "flex", alignItems: "center", gap: 8,
             whiteSpace: "nowrap",
