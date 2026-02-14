@@ -15,8 +15,13 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body {
-  overflow-x: hidden;
+html {
+  overflow-x: clip;
+  width: 100%;
+}
+
+body {
+  overflow-x: clip;
   width: 100%;
 }
 
