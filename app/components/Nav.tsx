@@ -48,9 +48,17 @@ function HamburgerIcon({ open }: { open: boolean }) {
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
   const { cartCount } = useCart();
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50);
@@ -63,10 +71,12 @@ export default function Nav() {
     setMenuOpen(false);
   }, [pathname]);
 
+  const condensed = scrolled || isMobile;
+
   // Close menu when scrolling back to top
   useEffect(() => {
-    if (!scrolled) setMenuOpen(false);
-  }, [scrolled]);
+    if (!scrolled && !isMobile) setMenuOpen(false);
+  }, [scrolled, isMobile]);
 
   // Close menu on click outside
   useEffect(() => {
@@ -89,53 +99,53 @@ export default function Nav() {
     <div style={{
       position: "sticky", top: 0, zIndex: 100,
       display: "flex", justifyContent: "center",
-      padding: scrolled ? "10px 0" : "0",
+      padding: condensed ? "10px 10px" : "0",
       transition: "padding 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     }}>
       <div ref={menuRef} style={{
-        width: scrolled ? "min(40vw, 520px)" : "100%",
-        minWidth: scrolled ? 360 : "auto",
+        width: condensed ? (isMobile ? "calc(100% - 0px)" : "min(40vw, 520px)") : "100%",
+        minWidth: condensed ? 280 : "auto",
         transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
       }}>
         <nav style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          height: scrolled ? 48 : 64,
-          padding: scrolled ? "0 24px" : "0 clamp(16px, 3vw, 48px)",
-          background: scrolled ? "rgba(160, 112, 60, 0.15)" : "rgba(250,248,244,0.96)",
-          backdropFilter: scrolled ? "blur(20px)" : "blur(16px)",
-          border: scrolled ? "1px solid rgba(160, 112, 60, 0.2)" : "1px solid transparent",
-          borderRadius: scrolled ? 14 : 0,
-          boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.06)" : "none",
+          height: condensed ? 48 : 64,
+          padding: condensed ? "0 24px" : "0 clamp(16px, 3vw, 48px)",
+          background: condensed ? "rgba(160, 112, 60, 0.15)" : "rgba(250,248,244,0.96)",
+          backdropFilter: condensed ? "blur(20px)" : "blur(16px)",
+          border: condensed ? "1px solid rgba(160, 112, 60, 0.2)" : "1px solid transparent",
+          borderRadius: condensed ? 14 : 0,
+          boxShadow: condensed ? "0 4px 24px rgba(0,0,0,0.06)" : "none",
           transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-          maxWidth: scrolled ? "none" : 1400,
+          maxWidth: condensed ? "none" : 1400,
           margin: "0 auto",
         }}>
           {/* Left — Nav Links (full) / Hamburger (condensed) */}
           <div style={{ display: "flex", alignItems: "center", minWidth: 0 }}>
-            {/* Hamburger — visible when scrolled */}
+            {/* Hamburger — visible when condensed */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
                 background: "none", border: "none", cursor: "pointer",
                 display: "flex", alignItems: "center",
                 padding: 4,
-                opacity: scrolled ? 1 : 0,
-                width: scrolled ? "auto" : 0,
+                opacity: condensed ? 1 : 0,
+                width: condensed ? "auto" : 0,
                 overflow: "hidden",
-                pointerEvents: scrolled ? "auto" : "none",
+                pointerEvents: condensed ? "auto" : "none",
                 transition: "opacity 0.4s ease, width 0.4s ease",
               }}
             >
               <HamburgerIcon open={menuOpen} />
             </button>
 
-            {/* Nav Links — visible at top */}
+            {/* Nav Links — visible at top on desktop */}
             <div style={{
               display: "flex", gap: 32, alignItems: "center",
-              opacity: scrolled ? 0 : 1,
-              width: scrolled ? 0 : "auto",
+              opacity: condensed ? 0 : 1,
+              width: condensed ? 0 : "auto",
               overflow: "hidden",
-              pointerEvents: scrolled ? "none" : "auto",
+              pointerEvents: condensed ? "none" : "auto",
               transition: "opacity 0.3s ease, width 0.4s ease",
             }}>
               {navItems.map(({ href, label }) => (
@@ -175,7 +185,7 @@ export default function Nav() {
             left: "50%",
             transform: "translateX(-50%)",
           }}>
-            {/* Logo image — visible when scrolled */}
+            {/* Logo image — visible when condensed */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/btg-logo.png"
@@ -184,30 +194,30 @@ export default function Nav() {
               height={26}
               style={{
                 objectFit: "contain",
-                opacity: scrolled ? 1 : 0,
-                width: scrolled ? 26 : 0,
+                opacity: condensed ? 1 : 0,
+                width: condensed ? 26 : 0,
                 transition: "opacity 0.4s ease, width 0.4s ease",
               }}
             />
-            {/* BTG text — visible when scrolled */}
+            {/* BTG text — visible when condensed */}
             <span style={{
               fontFamily: "var(--font-body)", fontSize: "1rem",
               fontWeight: 600, letterSpacing: "0.14em",
               color: COLORS.darkBrown,
-              opacity: scrolled ? 1 : 0,
-              width: scrolled ? "auto" : 0,
+              opacity: condensed ? 1 : 0,
+              width: condensed ? "auto" : 0,
               overflow: "hidden",
               transition: "opacity 0.4s ease, width 0.4s ease",
             }}>
               BTG
             </span>
-            {/* BEAVERTAILGANG text — visible at top */}
+            {/* BEAVERTAILGANG text — visible at top on desktop */}
             <span style={{
               fontFamily: "var(--font-body)", fontSize: "0.82rem",
               fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase",
               color: COLORS.darkBrown,
-              opacity: scrolled ? 0 : 1,
-              width: scrolled ? 0 : "auto",
+              opacity: condensed ? 0 : 1,
+              width: condensed ? 0 : "auto",
               overflow: "hidden",
               transition: "opacity 0.3s ease, width 0.4s ease",
             }}>
@@ -216,16 +226,17 @@ export default function Nav() {
           </Link>
 
           {/* Right — Social + Cart */}
-          <div style={{ display: "flex", gap: scrolled ? 14 : 20, alignItems: "center", transition: "gap 0.6s ease" }}>
+          <div style={{ display: "flex", gap: condensed ? 14 : 20, alignItems: "center", transition: "gap 0.6s ease" }}>
+            {/* Hide social icons on mobile to save space */}
             <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer"
-              style={{ color: "var(--fg-muted)", display: "flex", transition: "color 0.2s" }}
+              style={{ color: "var(--fg-muted)", display: isMobile ? "none" : "flex", transition: "color 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.color = "var(--fg)"}
               onMouseLeave={e => e.currentTarget.style.color = "var(--fg-muted)"}
             >
               <InstagramIcon />
             </a>
             <a href={BRAND.tiktok} target="_blank" rel="noopener noreferrer"
-              style={{ color: "var(--fg-muted)", display: "flex", transition: "color 0.2s" }}
+              style={{ color: "var(--fg-muted)", display: isMobile ? "none" : "flex", transition: "color 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.color = "var(--fg)"}
               onMouseLeave={e => e.currentTarget.style.color = "var(--fg-muted)"}
             >
@@ -242,12 +253,21 @@ export default function Nav() {
           </div>
         </nav>
 
+        {/* Gradient bottom line — visible at top only */}
+        <div style={{
+          height: 1.5,
+          background: `linear-gradient(90deg, transparent, ${COLORS.darkBrown}40, ${COLORS.darkBrown}, ${COLORS.darkBrown}40, transparent)`,
+          opacity: condensed ? 0 : 1,
+          transition: "opacity 0.4s ease",
+        }} />
+
         {/* Dropdown menu */}
         <div style={{
           position: "absolute",
           top: "calc(100% + 8px)",
           left: "50%",
           transform: "translateX(-50%)",
+          width: isMobile ? "calc(100% - 20px)" : "auto",
           background: "rgba(250,248,244,0.95)",
           backdropFilter: "blur(20px)",
           border: `1px solid ${COLORS.darkBrown}12`,
