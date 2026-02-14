@@ -146,9 +146,12 @@ export default function Nav() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
-                background: "none", border: "none", cursor: "pointer",
+                background: "none",
+                border: condensed ? "1px solid rgba(250,248,244,0.5)" : "none",
+                borderRadius: 8,
+                cursor: "pointer",
                 display: "flex", alignItems: "center",
-                padding: 4,
+                padding: condensed ? 8 : 4,
                 opacity: condensed ? 1 : 0,
                 width: condensed ? "auto" : 0,
                 overflow: "hidden",
@@ -213,6 +216,10 @@ export default function Nav() {
             position: "absolute",
             left: "50%",
             transform: "translateX(-50%)",
+            border: condensed ? "1px solid rgba(250,248,244,0.5)" : "none",
+            borderRadius: 8,
+            padding: condensed ? "4px 14px" : 0,
+            transition: "all 0.4s ease",
           }}>
             {/* Logo image — visible when condensed */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
