@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "./components/CartContext";
-import MarqueeBanner from "./components/MarqueeBanner";
+
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -36,7 +36,6 @@ export default function RootLayout({
       </head>
       <body>
         <CartProvider>
-          <MarqueeBanner />
           <Nav />
           <main>{children}</main>
           <Footer />

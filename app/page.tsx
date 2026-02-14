@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { COLORS, BRAND, COLLECTIONS } from "@/app/data/products";
-import { InstagramIcon, TikTokIcon } from "@/app/components/Icons";
+import { InstagramIcon, TikTokIcon, YouTubeIcon } from "@/app/components/Icons";
 import ProductCard from "@/app/components/ProductCard";
 
 // ─── HERO ────────────────────────────────────────────────
@@ -101,8 +101,20 @@ function Hero() {
 }
 
 // ─── COLLECTION BANNER ───────────────────────────────────
+function useIsMobile() {
+  const [mobile, setMobile] = useState(false);
+  React.useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return mobile;
+}
+
 function CollectionBanner({ collection, index, isLight = false }: { collection: typeof COLLECTIONS[0]; index: number; isLight?: boolean }) {
   const [hovered, setHovered] = useState(false);
+  const isMobile = useIsMobile();
   const isEven = index % 2 === 0;
 
   const bgColor = isLight ? COLORS.cream : collection.heroColor;
@@ -122,13 +134,13 @@ function CollectionBanner({ collection, index, isLight = false }: { collection: 
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "relative",
-        height: "clamp(280px, 45vh, 440px)",
+        minHeight: isMobile ? "auto" : "clamp(280px, 45vh, 440px)",
         background: bgColor,
         cursor: "pointer", overflow: "hidden",
         display: "flex", flexDirection: "column",
         justifyContent: "center",
-        padding: `0 clamp(36px, 7vw, 100px)`,
-        alignItems: isEven ? "flex-start" : "flex-end",
+        padding: isMobile ? "40px 24px" : `0 clamp(36px, 7vw, 100px)`,
+        alignItems: isMobile ? "flex-start" : (isEven ? "flex-start" : "flex-end"),
         transition: "all 0.4s ease",
         textDecoration: "none",
         border: isLight ? "1px solid var(--border)" : "none",
@@ -141,17 +153,19 @@ function CollectionBanner({ collection, index, isLight = false }: { collection: 
         opacity: hovered ? 1 : 0.4, transition: "opacity 0.5s ease",
       }} />
 
-      {/* Circle decoration */}
-      <div style={{
-        position: "absolute",
-        ...(isEven ? { right: "8%" } : { left: "8%" }),
-        top: "50%", transform: "translateY(-50%)",
-        width: 180, height: 180,
-        border: `1px solid ${circleColor}`,
-        borderRadius: "50%",
-      }} />
+      {/* Circle decoration — hidden on mobile */}
+      {!isMobile && (
+        <div style={{
+          position: "absolute",
+          ...(isEven ? { right: "8%" } : { left: "8%" }),
+          top: "50%", transform: "translateY(-50%)",
+          width: 180, height: 180,
+          border: `1px solid ${circleColor}`,
+          borderRadius: "50%",
+        }} />
+      )}
 
-      <div style={{ position: "relative", zIndex: 2, textAlign: isEven ? "left" : "right" }}>
+      <div style={{ position: "relative", zIndex: 2, textAlign: isMobile ? "left" : (isEven ? "left" : "right") }}>
         <span style={{
           fontFamily: "var(--font-body)", fontSize: "0.58rem",
           fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase",
@@ -163,7 +177,7 @@ function CollectionBanner({ collection, index, isLight = false }: { collection: 
           {collection.tag}
         </span>
         <h2 style={{
-          fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 4.5vw, 4rem)",
+          fontFamily: "var(--font-display)", fontSize: isMobile ? "clamp(1.6rem, 8vw, 2.4rem)" : "clamp(2.2rem, 4.5vw, 4rem)",
           fontWeight: 500, color: textColor,
           letterSpacing: "0.06em", lineHeight: 1.05,
           marginBottom: 14,
@@ -176,7 +190,7 @@ function CollectionBanner({ collection, index, isLight = false }: { collection: 
           fontFamily: "var(--font-body)", fontSize: "0.8rem",
           color: mutedTextColor, maxWidth: 380, lineHeight: 1.65,
           marginBottom: 20,
-          marginLeft: isEven ? 0 : "auto",
+          marginLeft: 0,
         }}>
           {collection.description}
         </p>
@@ -364,6 +378,22 @@ export default function HomePage() {
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--fg)"; }}
           >
             <TikTokIcon /> TikTok
+          </a>
+          <a href={BRAND.youtube} target="_blank" rel="noopener noreferrer"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              fontFamily: "var(--font-body)", fontSize: "0.7rem",
+              fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase",
+              padding: "12px 32px",
+              background: "transparent", color: "var(--fg)",
+              textDecoration: "none",
+              border: "1px solid var(--border)",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "var(--fg)"; e.currentTarget.style.color = "var(--bg)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--fg)"; }}
+          >
+            <YouTubeIcon /> YouTube
           </a>
         </div>
       </section>

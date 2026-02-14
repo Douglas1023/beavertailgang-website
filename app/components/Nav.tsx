@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { COLORS, BRAND } from "@/app/data/products";
-import { InstagramIcon, TikTokIcon, BagIcon } from "./Icons";
+import { InstagramIcon, TikTokIcon, YouTubeIcon, BagIcon } from "./Icons";
 import { useCart } from "./CartContext";
 
 const navItems = [
@@ -49,6 +49,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [navHovered, setNavHovered] = useState(false);
   const pathname = usePathname();
   const { cartCount } = useCart();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -107,7 +108,11 @@ export default function Nav() {
         minWidth: condensed ? 280 : "auto",
         transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
       }}>
-        <nav style={{
+        <nav
+          onMouseEnter={() => setNavHovered(true)}
+          onMouseLeave={() => setNavHovered(false)}
+          style={{
+          position: "relative",
           display: "flex", alignItems: "center", justifyContent: "space-between",
           height: condensed ? 48 : 64,
           padding: condensed ? "0 24px" : "0 clamp(16px, 3vw, 48px)",
@@ -120,6 +125,21 @@ export default function Nav() {
           maxWidth: condensed ? "none" : 1400,
           margin: "0 auto",
         }}>
+          {/* Hover rectangle — only on desktop full nav */}
+          {!condensed && (
+            <div style={{
+              position: "absolute",
+              top: "50%", left: 8, right: 8,
+              transform: "translateY(-50%)",
+              height: 44,
+              background: "rgba(160, 112, 60, 0.12)",
+              border: "1px solid rgba(160, 112, 60, 0.15)",
+              borderRadius: 14,
+              opacity: navHovered ? 1 : 0,
+              transition: "opacity 0.3s ease",
+              pointerEvents: "none",
+            }} />
+          )}
           {/* Left — Nav Links (full) / Hamburger (condensed) */}
           <div style={{ display: "flex", alignItems: "center", minWidth: 0 }}>
             {/* Hamburger — visible when condensed */}
@@ -158,16 +178,25 @@ export default function Nav() {
                     fontWeight: isActive(href) ? 600 : 400,
                     letterSpacing: "0.14em", textTransform: "uppercase",
                     color: isActive(href) ? "var(--fg)" : "var(--fg-muted)",
-                    transition: "color 0.25s ease",
+                    transition: "all 0.25s ease",
                     position: "relative",
-                    paddingBottom: 2,
+                    padding: "6px 12px",
+                    borderRadius: 8,
                     whiteSpace: "nowrap",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = "linear-gradient(135deg, rgba(250,248,244,0.9), rgba(230,224,214,0.7))";
+                    e.currentTarget.style.color = "var(--fg)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = isActive(href) ? "var(--fg)" : "var(--fg-muted)";
                   }}
                 >
                   {label}
                   {isActive(href) && (
                     <span style={{
-                      position: "absolute", bottom: -2, left: 0, right: 0,
+                      position: "absolute", bottom: 2, left: 12, right: 12,
                       height: 1.5, background: COLORS.caramel, borderRadius: 1,
                     }} />
                   )}
@@ -241,6 +270,13 @@ export default function Nav() {
               onMouseLeave={e => e.currentTarget.style.color = "var(--fg-muted)"}
             >
               <TikTokIcon />
+            </a>
+            <a href={BRAND.youtube} target="_blank" rel="noopener noreferrer"
+              style={{ color: "var(--fg-muted)", display: isMobile ? "none" : "flex", transition: "color 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.color = "var(--fg)"}
+              onMouseLeave={e => e.currentTarget.style.color = "var(--fg-muted)"}
+            >
+              <YouTubeIcon />
             </a>
             <Link href="/cart" style={{
               color: "var(--fg-muted)", display: "flex", transition: "color 0.2s",

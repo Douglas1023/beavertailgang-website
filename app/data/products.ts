@@ -9,6 +9,7 @@ export const BRAND = {
   email: "hello@beavertailgang.com",
   instagram: "https://www.instagram.com/beavertailgang/",
   tiktok: "https://www.tiktok.com/@beavertailgang",
+  youtube: "https://www.youtube.com/@beavertailgang",
 };
 
 export const COLORS = {

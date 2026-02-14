@@ -20,6 +20,14 @@ export function TikTokIcon() {
   );
 }
 
+export function YouTubeIcon() {
+  return (
+    <svg width="20" height="18" viewBox="0 0 24 18" fill="currentColor">
+      <path d="M23.5 3.5a3 3 0 00-2.1-2.1C19.5.8 12 .8 12 .8s-7.5 0-9.4.6A3 3 0 00.5 3.5C0 5.4 0 9 0 9s0 3.6.5 5.5a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 12.6 24 9 24 9s0-3.6-.5-5.5zM9.6 12.8V5.2L15.8 9l-6.2 3.8z" />
+    </svg>
+  );
+}
+
 export function BagIcon({ count }: { count: number }) {
   return (
     <div style={{ position: "relative", display: "flex", alignItems: "center" }}>

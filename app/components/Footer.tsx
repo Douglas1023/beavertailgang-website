@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { COLORS, BRAND, COLLECTIONS } from "@/app/data/products";
-import { InstagramIcon, TikTokIcon } from "./Icons";
+import { InstagramIcon, TikTokIcon, YouTubeIcon } from "./Icons";
 
 export default function Footer() {
   return (
@@ -43,6 +43,11 @@ export default function Footer() {
               onMouseEnter={e => e.currentTarget.style.color = COLORS.caramel}
               onMouseLeave={e => e.currentTarget.style.color = "var(--fg-muted)"}
             ><TikTokIcon /></a>
+            <a href={BRAND.youtube} target="_blank" rel="noopener noreferrer"
+              style={{ color: "var(--fg-muted)", transition: "color 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.caramel}
+              onMouseLeave={e => e.currentTarget.style.color = "var(--fg-muted)"}
+            ><YouTubeIcon /></a>
           </div>
         </div>
 

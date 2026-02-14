@@ -102,6 +102,7 @@ export default function ContactPage() {
             { label: "LOCATION", value: BRAND.location },
             { label: "INSTAGRAM", value: "@beavertailgang" },
             { label: "TIKTOK", value: "@beavertailgang" },
+            { label: "YOUTUBE", value: "@beavertailgang" },
           ].map(({ label, value }) => (
             <div key={label}>
               <p style={{
