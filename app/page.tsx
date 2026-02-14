@@ -45,8 +45,8 @@ function Hero() {
         }} />
 
         <p className="fade-up d3" style={{
-          fontFamily: "var(--font-display)", fontSize: "1.15rem",
-          fontWeight: 500, fontStyle: "italic",
+          fontFamily: "var(--font-typewriter)", fontSize: "1.15rem",
+          fontWeight: 400, fontStyle: "normal",
           color: COLORS.darkBrown,
           letterSpacing: "0.08em",
           marginBottom: 12,
@@ -291,16 +291,17 @@ export default function HomePage() {
         }} />
         <div style={{ maxWidth: 620, margin: "0 auto", position: "relative", zIndex: 2 }}>
           <p style={{
-            fontFamily: "var(--font-script)", fontSize: "1.2rem",
-            color: COLORS.caramel, marginBottom: 20,
-          }}>BTG</p>
+            fontFamily: "var(--font-typewriter)", fontSize: "1.1rem",
+            fontWeight: 400, letterSpacing: "0.18em",
+            color: COLORS.caramel, marginBottom: 24,
+          }}>BEAVERTAILGANG</p>
           <p style={{
-            fontFamily: "var(--font-display)", fontSize: "clamp(1.5rem, 3vw, 2.4rem)",
-            fontWeight: 400, fontStyle: "italic",
+            fontFamily: "var(--font-typewriter)", fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)",
+            fontWeight: 400,
             color: COLORS.cream,
-            lineHeight: 1.5, letterSpacing: "0.02em",
+            lineHeight: 1.7, letterSpacing: "0.02em",
           }}>
-            {BRAND.description}
+            Every BeaverTailGang drop is built with intention. Limited runs, no restocks. We make gear you&apos;ll grab before every round without thinking twice.
           </p>
           <div style={{
             width: 36, height: 1.5, background: COLORS.caramel,

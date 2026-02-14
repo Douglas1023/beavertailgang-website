@@ -21,16 +21,13 @@ export default function AboutPage() {
           display: "flex", flexDirection: "column", gap: 24,
         }}>
           <p>
-            BeaverTailGang started with one idea: make the best golf hat out there. Not the most hyped. Not the trendiest. Just the one you grab every single round without thinking twice.
+            BeaverTailGang started with a beaver tail-sized divot on a boys trip in Steamboat, CO. A couple of native Texans watched a perfect one-piece divot fly through space and time and knew something had to come from that moment. That was the start of BTG.
           </p>
           <p>
-            Based in Austin, Texas, BTG runs on limited drops. When a colorway sells out, it&apos;s done — no restocks, no exceptions. That&apos;s not a gimmick. It&apos;s how we keep things intentional.
+            Based in Austin, Texas, BTG runs on limited drops. When a style sells out, it&apos;s done. No exceptions. That&apos;s not a gimmick, it&apos;s how we keep things intentional.
           </p>
           <p>
-            Our community of 11,000+ golfers isn&apos;t built on algorithms. It&apos;s built on people who play the game, wear the hat, and tag us from courses all over the country. DM us to get featured — that&apos;s always been the move.
-          </p>
-          <p>
-            Every piece we make is designed with purpose. We don&apos;t chase trends. We create what we&apos;d want to wear on the course — and we think you will too.
+            Our community of 35,000+ across Instagram and TikTok isn&apos;t built on algorithms. It&apos;s built on golfers who play the game, wear the gear, and tag us from courses all over the country. DM us to get featured, that&apos;s always been the move.
           </p>
 
           <div style={{
@@ -42,7 +39,7 @@ export default function AboutPage() {
               { title: "LIMITED DROPS", desc: "Once it's gone, it's gone. Every hat is intentionally scarce." },
               { title: "BUILT FOR THE COURSE", desc: "Premium materials, clean fits, designed to perform." },
               { title: "AUSTIN, TX", desc: "Independent brand, rooted in Texas golf culture." },
-              { title: "COMMUNITY FIRST", desc: "11K+ strong. DM us to be featured." },
+              { title: "35K+ STRONG", desc: "Built across Instagram and TikTok. DM us to be featured." },
             ].map((v, i) => (
               <div key={i}>
                 <h3 style={{

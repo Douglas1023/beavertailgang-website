@@ -25,7 +25,7 @@ export default function ContactPage() {
           fontFamily: "var(--font-body)", fontSize: "0.86rem",
           color: "var(--fg-muted)", lineHeight: 1.7, marginBottom: 44,
         }}>
-          Questions, collabs, wholesale, or just want to say what&apos;s up? Hit us.
+          Questions, collabs, or just want to say what&apos;s up? Hit us.
         </p>
 
         {!sent ? (
