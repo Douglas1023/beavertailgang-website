@@ -43,8 +43,8 @@ export interface Collection {
 
 export const COLLECTIONS: Collection[] = [
   {
-    id: "spring-kit",
-    name: "SPRING KIT",
+    id: "snapbacks",
+    name: "SNAPBACKS",
     tag: "Core",
     description: "The hat that started it all. Clean lines, perfect fit, unmistakable on the course.",
     heroColor: COLORS.darkBrown,
